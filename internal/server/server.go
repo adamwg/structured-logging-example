@@ -41,6 +41,7 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if err := enc.Encode(resp); err != nil {
 		ll = ll.Err(err)
 		errorResponse(w, http.StatusInternalServerError, "failed to encode response", ll)
+		return
 	}
 	ll.KV("random_name", name).KV("resp_code", http.StatusOK).Info("returned name to user")
 }
